@@ -50,18 +50,10 @@ func signup(w http.ResponseWriter, r *http.Request) {
 		Password: r.FormValue("password"),
 		Email:    r.FormValue("email"),
 	}
-	display(user.Username, user.Email, user.Password)
-	_, err := db.Exec(`insert into info (username,email,password) value (?,?,?)`,
-		user.Username, user.Email, user.Password)
+	_, err := db.Exec(`insert into info (username,email,password) value (?,?,?)`, user.Username, user.Email, user.Password)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	fmt.Fprintf(w, "User created successfully!")
-}
-
-func display(a string, b string, c string) {
-	fmt.Println(a)
-	fmt.Println(b)
-	fmt.Println(c)
 }
